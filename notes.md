@@ -90,3 +90,46 @@ Problems encountered:
 I did not add in a parameter WIDTH line, and hence the output was only 1 bit long. 
 I needed to make it clear that the output is 8 bits long, so that all the lights will light up!
 ---
+
+## Task 3 - Exploring the **_clktick.sv_** and the **_delay.sv_** modules
+---
+
+In Lecture 4 slides 9 & 10, you were introduced to the **_clktick.sv_** module. The interface signals for this module is:
+
+```Verilog
+module clktick #(
+	parameter WIDTH = 16
+)(
+  // interface signals
+  input  logic             clk,      // clock 
+  input  logic             rst,      // reset
+  input  logic             en,       // enable signal
+  input  logic [WIDTH-1:0] N,     	 // clock divided by N+1
+  output logic  		   tick      // tick output
+);
+```
+In the _task3_ folder of this repo, you are provided with the testbench **_clktick_tb.cpp_** and shell script **_clktick.sh_** to build and test the **_clktick_** module.  
+
+The testbench flashes the neopixel strip LEDs on and off at a rate determined by N.  Our goal is to calibrate the circuit (under simulation) to find what value of N gives us a tick period of 1 sec.
+
+Compile and test the **_clktick.sv_** module.  Use the metronome app on Google (just search for metronome) to generate a beat at 60 bpm.  Now adjust the rotary switch to change the flash rate of the neopixels to match the metronome.  The **_vbdValue()_** shown on bottom left of the TFT display is the value for N which gives a tick period of 1 second! (Why?)
+
+The reason that we need to do this calibration is that the Verilator simulation of your design is NOT in real time.  Every computer will work at different rate and therefore takes different amount of time to simulate one cycle of the clock signal _clk_. For a 14" M1 Macbook Pro (my computer), N is around 24 for a tick period of 1 sec (i.e. one tick pulse every second).
+
+### Results ###
+N is around 30 for a tick period of 1 sec.
+
+___
+
+<p align="center">TEST YOURSELF CHALLENGE </p>
+
+___
+
+Implement the following design by combining **_clkctick.sv_** with **_f1_fsm.sv_** so that the F1 light sequence is cycle through automatically with 1 second delay per state transition.
+
+<p align="center"> <img src="images/f1_sequence.jpg" /> </p>
+
+### What was done ###
+Added a new file **_top.sv_** that was used to combine **_clkctick.sv_** with **_f1_fsm.sv_**.
+
+---
