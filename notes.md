@@ -70,3 +70,23 @@ Based on the **_primitive polynomial_** table in Lecture 4 slide 16, modify **_l
 
 Changed the 4 bits to 7 bits. 
 Problem: vbdHex() only shows one digit on the display. With 7 bits, value will be more than 1 digit long, not sure how to change code to accomodate that. 
+
+## Task 2 - Formula 1 Light Sequence
+---
+
+Formula 1 (F1) racing has starting light consists of a series of red lights that turn ON one by one, until all lights are ON. Then all of them turn OFF simultaneously after a random delay.
+
+The goal of this task is to design a FSM that cycles through the sequence according to the following FSM:
+
+<p align="center"> <img src="images/state_diag.jpg" /> </p>
+
+Based on the notes from Lecture 5, implement this state machine in SystemVerilog to drive the neopixel bar and cycle through the F1 light sequence.  You should use the switch on the rotary switch with the **_vbdFlag()_** function (in mode 1) to drive the _en_ signal as shown below:
+
+<p align="center"> <img src="images/F1_FSM.jpg" /> </p>
+
+Write the testbench **_f1_fsm_tb.cpp_**. Compile and test your design.  Each time you press the switch, you should step through the FSM and cycle through the F1 light sequence.
+
+Problems encountered:
+I did not add in a parameter WIDTH line, and hence the output was only 1 bit long. 
+I needed to make it clear that the output is 8 bits long, so that all the lights will light up!
+---

@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/*",
                 "/usr/local/share/verilator/include",
-                "${workspaceFolder}/task1/obj_dir"
+                "${workspaceFolder}/task1/obj_dir",
+                "${workspaceFolder}/task2/obj_dir"
             ],
             "defines": [],
             "macFrameworkPath": [
